@@ -1,16 +1,13 @@
-# Clients - Node App
+# Node App using Dialogflow API
 
-Node.js client using Dialogflow API
+Node.js client app using Dialogflow API
 
-# MUST-DO
+# Requirement
 
-Note that you need credential.json downloaded from your Dialogflow project in order to use Dialogflow API.
+1. Download credential.json from your Dialogflow project.
+2. Update package.json to the path of your credential.json.
+```bash
+   export GOOGLE_APPLICATION_CREDENTIALS='./your_own_credential.json'
+```
 
-Update the path of credential.json in package.json.
-e.g. export GOOGLE_APPLICATION_CREDENTIALS='./your_own_credential.json'
-
-
-# Dialogflow Tutorial Link
-
-https://rubenchoi.tistory.com/33
-
+Please see 🎸[Tutorial](https://rubenchoi.tistory.com/33) for more detail.
