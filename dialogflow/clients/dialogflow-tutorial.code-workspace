@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "react-app"
+		},
+		{
+			"path": "nodejs-app"
+		},
+		{
+			"path": "text-based"
+		}
+	],
+	"settings": {}
+}
