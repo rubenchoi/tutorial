@@ -4,8 +4,5 @@ This repository contains the sample codes for [🍸RubenChoi's IT Tutorial](http
 
 ### Contents
 
-
-Topic           | Tutorial        | Sample Code
---------------- | --------------- | ---------------
-**React** | [Link](https://rubenchoi.tistory.com) | [Link](/react)
-**Dialogflow** | [Link](https://rubenchoi.tistory.com/33) | [Link](/dialogflow)
+- **React**, see <a href="https://rubenchoi.tistory.com" target="_blank">Tutorial</a> or [Sample Code](/react)
+- **Dialogflow**, see <a href="https://rubenchoi.tistory.com/33" target="_blank">Tutorial</a> or [Sample Code](/dialogflow)
