@@ -5,6 +5,7 @@
 const functions = require('firebase-functions');
 const { WebhookClient } = require('dialogflow-fulfillment');
 const https = require('https');
+const WeatherApi = require('./util/KMAHandler.js');
 
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
 
@@ -30,14 +31,14 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         agent.add('');
     }
 
-    function getWeather(agent) {
-        console.log("----------------getWeather");
-        return weatherAPI()
+    function getSample(agent) {
+        console.log("----------------getSample");
+        return sampleAPI()
             .then(result => agent.add(result))
             .catch((err) => agent.add(err));
     }
 
-    function weatherAPI() {
+    function sampleAPI() {
         const url = "https://rubenchoi-test.web.app/test";
         return new Promise((resolve, reject) => {
             https.get(url, function (res) {
@@ -56,6 +57,13 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
                 });
             });
         });
+    }
+
+    function getWeather(agent) {
+        console.log("----------------getWeather");
+        return new WeatherApi().weatherAPI()
+            .then(result => agent.add(result))
+            .catch((err) => agent.add(err));
     }
 
     // // Uncomment and edit to make your own intent handler
