@@ -38,7 +38,7 @@ function App() {
               <NavLink href="/test05">Webcam to Canvas</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://github.com/rubenchoi/react-3d-tutorial">GitHub</NavLink>
+              <NavLink href="https://github.com/rubenchoi/tutorial">GitHub</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

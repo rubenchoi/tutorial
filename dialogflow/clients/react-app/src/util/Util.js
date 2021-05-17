@@ -18,7 +18,7 @@ export function Setting(props) {
     const getInputGroup = ({ key, title, defVal, callback }, idx) => {
         let defaultValue = key ? LoadPref(key, defVal) : defVal;
         return (
-            <InputGroup key={idx} style={{ width: "90%", marginBottom: "0.5em" }}>
+            <InputGroup key={idx} style={{ marginBottom: "0.5em" }}>
                 <InputGroupAddon addonType="prepend">{title}</InputGroupAddon>
                 <Input id={key} defaultValue={defaultValue} />
                 <InputGroupAddon addonType="append" onClick={() => update(key, callback)}>Set</InputGroupAddon>
@@ -35,7 +35,7 @@ export function Setting(props) {
     }
 
     return (
-        <Card style={{ width: '90%' }}>
+        <Card>
             <CardBody>
                 <p style={{ fontSize: '1em' }}>{props.title}</p>
                 <p style={{ fontSize: '0.7em' }}>{props.subtitle}</p>
@@ -49,7 +49,7 @@ export function StatusLog(props) {
     let inProgress = (props.status !== undefined && props.status.includes('...'));
     let color;
     switch (props.status) {
-        case Status.INITILIZING:
+        case Status.INITIALIZING:
             color = "warning";
             break;
         case Status.LISTENING:

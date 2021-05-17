@@ -103,28 +103,20 @@ export default class DialogflowHandler extends React.Component {
                     <Button color="primary" onClick={() => this.startDialogflowByAudioStream()} style={{ margin: "1em" }}>
                         Start Dialogflow
                     </Button>
+
                     {this.state.reload && <Button color="danger" onClick={() => window.location.reload()}>Reload required</Button>}
+                    
+                    <Setting
+                        title={'Google Dialogflow'}
+                        subtitle={(((this.state.status !== Status.UNAVAILABLE && this.state.status !== Status.INITIALIZING)
+                            ? 'connected to ' : 'disconnected from ') + this.state.dfAddress + ':' + this.state.dfPort)}
+                        items={[
+                            { key: 'dfAddress', title: 'DF Host', defVal: this.state.dfAddress, callback: () => this.setState({ reload: true }) },
+                            { key: 'dfPort', title: 'DF Port', defVal: this.state.dfPort, callback: () => this.setState({ reload: true }) }
+                        ]}
+                    />
                 </>
             }
-            <div style={{ width: '90%', margin: 'auto' }}>
-                <Setting
-                    title={'Google Dialogflow'}
-                    subtitle={(((this.state.status !== Status.UNAVAILABLE && this.state.status !== Status.INITIALIZING)
-                        ? 'connected to ' : 'disconnected from ') + this.state.dfAddress + ':' + this.state.dfPort)}
-                    items={[
-                        { key: 'dfAddress', title: 'DF Host', defVal: this.state.dfAddress, callback: () => this.setState({ reload: true }) },
-                        { key: 'dfPort', title: 'DF Port', defVal: this.state.dfPort, callback: () => this.setState({ reload: true }) }
-                    ]}
-                />
-                <div style={{ margin: '1em' }}>
-                    <iframe
-                        allow="microphone;"
-                        width="350"
-                        height="430"
-                        src="https://console.dialogflow.com/api-client/demo/embedded/ee3a2cad-4346-436e-aeb0-e19379dd2966">
-                    </iframe>
-                </div>
-            </div>
         </>);
     }
 }

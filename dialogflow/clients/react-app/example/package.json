@@ -10,10 +10,14 @@
     "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject"
   },
   "dependencies": {
+    "@rubenchoi/react3d": "^0.8.1",
+    "bootstrap": "^5.0.0",
     "react": "file:../node_modules/react",
+    "react-app": "file:..",
     "react-dom": "file:../node_modules/react-dom",
+    "react-draggable": "^4.4.3",
     "react-scripts": "file:../node_modules/react-scripts",
-    "react-app": "file:.."
+    "reactstrap": "^8.9.0"
   },
   "devDependencies": {
     "@babel/plugin-syntax-object-rest-spread": "^7.8.3"
