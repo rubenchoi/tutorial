@@ -1,0 +1,20 @@
+## Credits
+
+* [dialogflow](https://github.com/googleapis/nodejs-dialogflow) under Apache-2.0 License, 
+* [dialogflow-fulfillment](https://github.com/dialogflow/dialogflow-fulfillment-nodejs) under Apache-2.0 License, 
+* [actions-on-google](https://github.com/actions-on-google/actions-on-google-nodejs) under Apache-2.0 License, 
+* [firebase-admin](https://github.com/firebase/firebase-admin-node) under Apache-2.0 License, 
+* [firebase-functions](https://github.com/firebase/firebase-functions) under MIT License,
+* [Reactstrap](https://github.com/reactstrap/reactstrap) under MIT License,
+* [yargs](https://github.com/yargs/yargs) under MIT License,
+* [express](https://github.com/expressjs/express) under MIT License,
+* [path](https://github.com/jinder/path) under MIT License,
+* [pb-util](https://github.com/callmehiphop/pb-util) under ISC License,
+* [socket.io](https://github.com/socketio/socket.io) under MIT License,
+* [socket.io-client](https://github.com/socketio/socket.io-client) under MIT License,
+* [socket.io-stream](https://github.com/nkzawa/socket.io-stream) under MIT License,
+* [stream](https://github.com/juliangruber/stream) under MIT License,
+* [util](https://github.com/browserify/node-util) under MIT License,
+* [uuid](https://github.com/uuidjs/uuid) under MIT License,
+* [recordrtc](https://github.com/muaz-khan/RecordRTC) under MIT License,
+* [mqtt](https://github.com/mqttjs/MQTT.js) under MIT License
