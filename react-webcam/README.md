@@ -1,15 +1,15 @@
 # React library for Webcam Selection
 
-[![NPM](https://img.shields.io/npm/v/@rubenchoi/react-webcam.svg)](https://www.npmjs.com/package/@rubenchoi/react-webcam) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/@rubenchoi/webcam.svg)](https://www.npmjs.com/package/@rubenchoi/webcam) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-🎸[Doc](https://rubenchoi.tistory.com/entry/React-%EC%9B%B9%EC%BA%A0-4-Select-webcam?category=467530)
-
-This project is created using [create-react-library](https://www.npmjs.com/package/create-react-library)
+React library for Webcam Selection. 
+Please see [document](https://rubenchoi.tistory.com/entry/React-%EC%9B%B9%EC%BA%A0-4-Select-webcam?category=467530) for further information. 
+This project is created using [create-react-library](https://www.npmjs.com/package/create-react-library).
 
 ## Install
 
 ```bash
-npm install --save @rubenchoi/react-webcam
+npm install --save @rubenchoi/webcam
 ```
 
 ## Usage
