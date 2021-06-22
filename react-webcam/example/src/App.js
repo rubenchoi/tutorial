@@ -1,17 +1,23 @@
 import React from 'react'
-import { WebcamComponent } from '@rubenchoi/react-webcam';
+import { WebcamComponent } from '@rubenchoi/webcam';
 
-import '@rubenchoi/react-webcam/dist/index.css'
+import '@rubenchoi/webcam/dist/index.css'
 
 const App = () => {
   const onStream = (stream) => {
     console.log(stream);
   }
+
+  const onMute = (muted) => {
+    console.log(muted ? 'muted' : 'unmuted');
+  }
+
   return (
     <div>
       <h2>React App Webcam Test</h2>
-      <div style={{ position: 'absolute', top: '20%', left: '20%', border: '2px solid green', padding: '1em' }}>
-        <WebcamComponent callback={onStream} />
+      <hr />
+      <div style={{ width: '40vw', margin: '1em' }}>
+        <WebcamComponent onStream={onStream} onMute={onMute} audioTest={true} />
       </div>
     </div >
   )

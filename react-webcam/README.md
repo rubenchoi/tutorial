@@ -1,11 +1,10 @@
-# React Webcam Tutorial
+# React library for Webcam Selection
 
 [![NPM](https://img.shields.io/npm/v/@rubenchoi/react-webcam.svg)](https://www.npmjs.com/package/@rubenchoi/react-webcam) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-This repository contains the sample codes about React Webcam:
+🎸[Doc](https://rubenchoi.tistory.com/entry/React-%EC%9B%B9%EC%BA%A0-4-Select-webcam?category=467530)
 
-🎸[Ruben Choi's IT Tutorial - React Webcam](https://rubenchoi.tistory.com/59)
-
+This project is created using [create-react-library](https://www.npmjs.com/package/create-react-library)
 
 ## Install
 
@@ -17,21 +16,25 @@ npm install --save @rubenchoi/react-webcam
 
 ```jsx
 import React from 'react'
-import { WebcamComponent } from '@rubenchoi/react-webcam';
-
-import '@rubenchoi/react-webcam/dist/index.css'
+import { WebcamComponent } from '@rubenchoi/webcam';
+import '@rubenchoi/webcam/dist/index.css'
 
 const App = () => {
-  const onStream = (stream) => {
-    console.log(stream);
-  }
+  const onStream = (stream) => console.log(stream);
+
+  const onMute = (muted) => console.log(muted ? 'muted' : 'unmuted')
+
   return (
     <div>
       <h2>React App Webcam Test</h2>
-        <WebcamComponent callback={onStream} />
+      <div style={{ width: '40vw', margin: '1em' }}>
+        <WebcamComponent onStream={onStream} onMute={onMute} audioTest={true} />
+      </div>
     </div >
   )
 }
+
+export default App
 ```
 
 ## License

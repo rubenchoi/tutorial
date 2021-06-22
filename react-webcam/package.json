@@ -1,13 +1,14 @@
 {
-  "name": "@rubenchoi/react-webcam",
-  "version": "1.0.1",
-  "description": "React Select Webcam - Made with create-react-library",
+  "name": "@rubenchoi/webcam",
+  "version": "1.0.0",
+  "description": "React library selecting webcam",
   "author": "rubenchoi",
   "license": "MIT",
-  "repository": "rubenchoi/tutorial/react-webcam",
+  "repository": "https://github.com/rubenchoi/tutorial/tree/main/react-webcam",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
+  "private": false,
   "engines": {
     "node": ">=10"
   },
@@ -24,7 +25,7 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "^16.13.1"
   },
   "devDependencies": {
     "microbundle-crl": "^0.13.10",
@@ -49,5 +50,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
