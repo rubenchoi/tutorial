@@ -67,7 +67,7 @@ function FaceDetector() {
         }
 
         const preds = await estimateCanvas(canvasRef.current);
-        // console.log("-----", preds);
+        console.log("-----", preds);
 
         for (let i = 0; i < preds.length; i++) {
           let p = preds[i];

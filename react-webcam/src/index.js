@@ -116,42 +116,43 @@ export const WebcamComponent = (props) => {
     props.onMute && props.onMute(enableAudio);
   }
 
-  return (<>
-    <div style={{ fontSize: '1em' }}>
-      <h3>Settings</h3>
-      <div className={style.gridContainer}>
-        <div className={style.gridItem}>Mic: </div>
-        <div className={style.gridItem}>
-          <span><select ref={refSelectMic} onChange={(e) => startWebcam()}></select></span>
-          {props.onMute && <button onClick={onMute} style={{ marginLeft: '2em' }}>{enableAudio ? 'MUTE' : 'UNMUTE'}</button>}
+  return (
+    <div style={{ display: props.showDetail ? 'block' : 'none' }}>
+      <div style={{ fontSize: '1em' }}>
+        <h3>Settings</h3>
+        <div className={style.gridContainer}>
+          <div className={style.gridItem}>Mic: </div>
+          <div className={style.gridItem}>
+            <span><select ref={refSelectMic} onChange={(e) => startWebcam()}></select></span>
+            {props.onMute && <button onClick={onMute} style={{ marginLeft: '2em' }}>{enableAudio ? 'MUTE' : 'UNMUTE'}</button>}
+          </div>
+          <div className={style.gridItem}>Video: </div>
+          <div className={style.gridItem}><select ref={refSelectVideo} onChange={(e) => startWebcam()}></select></div>
         </div>
-        <div className={style.gridItem}>Video: </div>
-        <div className={style.gridItem}><select ref={refSelectVideo} onChange={(e) => startWebcam()}></select></div>
+        <div>
+          {getController(PAN)}
+          {getController(TILT)}
+          {getController(ZOOM)}
+        </div>
       </div>
-      <div>
-        {getController(PAN)}
-        {getController(TILT)}
-        {getController(ZOOM)}
-      </div>
+
+      <hr />
+      <video ref={refVideo} autoPlay style={{ width: '20vw', margin: 'auto' }} />
+      <p style={{ fontSize: '0.8em' }}>{videoWH}</p>
+
+      {props.audioTest &&
+        <>
+          <hr />
+          <p>Audio Test:</p>
+          <iframe
+            width="100"
+            height="100"
+            src="https://www.youtube.com/embed/1Hkc_2b03jw"
+            title="Audio Test"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" />
+        </>
+      }
     </div>
-
-    <hr />
-    <video ref={refVideo} autoPlay style={{ width: '20vw', margin: 'auto' }} />
-    <p style={{ fontSize: '0.8em' }}>{videoWH}</p>
-
-    {props.audioTest &&
-      <>
-        <hr />
-        <p>Audio Test:</p>
-        <iframe
-          width="100"
-          height="100"
-          src="https://www.youtube.com/embed/1Hkc_2b03jw"
-          title="Audio Test"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" />
-      </>
-    }
-  </>
   );
 }

@@ -1,4 +1,4 @@
-# React library for Webcam Selection
+# React library selecting webcam
 
 [![NPM](https://img.shields.io/npm/v/@rubenchoi/webcam.svg)](https://www.npmjs.com/package/@rubenchoi/webcam) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
