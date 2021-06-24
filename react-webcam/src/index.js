@@ -91,7 +91,15 @@ export const WebcamComponent = (props) => {
 
     setStream(stream);
     setVideoWH('w: ' + settings.width + ' h: ' + settings.height);
-    props.onStream && props.onStream(stream, mediaParams);
+
+    const extraInfo = {
+      params: mediaParams,
+      videoId: refSelectVideo.current.value,
+      audioId: refSelectMic.current.value,
+      width: settings.width,
+      height: settings.height
+    }
+    props.onStream && props.onStream(stream, extraInfo);
   }
 
   useEffect(() => {
