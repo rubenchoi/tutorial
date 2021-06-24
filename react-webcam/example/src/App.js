@@ -6,8 +6,8 @@ import '@rubenchoi/webcam/dist/index.css'
 const App = () => {
   const [showDetail, setShowDetail] = React.useState(true);
 
-  const onStream = (stream) => {
-    console.log(stream);
+  const onStream = (stream, mediaParams) => {
+    console.log(stream, mediaParams);
   }
 
   const onMute = (muted) => {

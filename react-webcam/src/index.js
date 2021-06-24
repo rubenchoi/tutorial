@@ -57,7 +57,8 @@ export const WebcamComponent = (props) => {
   }
 
   const startWebcam = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia(getParams(refSelectVideo.current.value, refSelectMic.current.value));
+    const mediaParams = getParams(refSelectVideo.current.value, refSelectMic.current.value);
+    const stream = await navigator.mediaDevices.getUserMedia(mediaParams);
 
     refVideo.current.srcObject = stream;
 
@@ -90,7 +91,7 @@ export const WebcamComponent = (props) => {
 
     setStream(stream);
     setVideoWH('w: ' + settings.width + ' h: ' + settings.height);
-    props.onStream && props.onStream(stream);
+    props.onStream && props.onStream(stream, mediaParams);
   }
 
   useEffect(() => {
