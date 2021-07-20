@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>React App Webcam Test</h2>
+      <h2>React App Webcam Control</h2>
       <hr />
       <button onClick={() => setShowDetail(!showDetail)}>{showDetail ? 'Hide' : 'Show'}</button>
       <div style={{ width: '40vw', margin: '1em' }}>

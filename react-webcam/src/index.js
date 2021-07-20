@@ -15,6 +15,8 @@ export const WebcamComponent = (props) => {
   const refVideo = useRef(null);
   const refSelectMic = useRef(null);
   const refSelectVideo = useRef(null);
+  const refCanvas = useRef(null);
+  const refVideoSize = useRef(null);
 
   const listDevices = async () => {
     const devices = await navigator.mediaDevices.enumerateDevices();
@@ -125,15 +127,48 @@ export const WebcamComponent = (props) => {
     props.onMute && props.onMute(enableAudio);
   }
 
+  const changeSize = (e) => {
+    const wh = e.target.value.split(':')
+    console.log(wh);
+    const track = stream.getVideoTracks()[0];
+    track.applyConstraints({
+      width: wh[0],
+      height: wh[1]
+    }).then(() => {
+      const settings = track.getSettings();
+      setVideoWH('w: ' + settings.width + ' h: ' + settings.height);
+    })
+      .catch(err => console.log(err))
+  }
+
+  const download = () => {
+    const canvas = refCanvas.current;
+    const ctx = canvas.getContext('2d');
+    canvas.width = refVideo.current.videoWidth;
+    canvas.height = refVideo.current.videoHeight;
+    ctx.drawImage(refVideo.current, 0, 0);
+    canvas.toBlob(blob => {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      // a.href.onload = () => {
+      //   URL.revokeObjectURL(url);
+      // }
+      a.download = 'testfile.png';
+      document.body.appendChild(a);
+      a.click();
+    }, 'image/png');
+  }
+
   return (
     <div style={{ display: props.showDetail ? 'block' : 'none' }}>
-      <div style={{ fontSize: '1em' }}>
+      <div style={{ fontSize: '1em', width: 'fit-content', border: '1px solid gray' }}>
         <h3>Settings</h3>
         <div className={style.gridContainer}>
           <div className={style.gridItem}>Mic: </div>
           <div className={style.gridItem}>
-            <span><select ref={refSelectMic} onChange={(e) => startWebcam()}></select></span>
-            {props.onMute && <button onClick={onMute} style={{ marginLeft: '2em' }}>{enableAudio ? 'MUTE' : 'UNMUTE'}</button>}
+            <select style={{ float: 'left' }} ref={refSelectMic} onChange={(e) => startWebcam()}></select>
+            {props.onMute &&
+              <button onClick={onMute} style={{ float: 'left' }}>{enableAudio ? 'MUTE' : 'UNMUTE'}</button>}
           </div>
           <div className={style.gridItem}>Video: </div>
           <div className={style.gridItem}><select ref={refSelectVideo} onChange={(e) => startWebcam()}></select></div>
@@ -146,11 +181,24 @@ export const WebcamComponent = (props) => {
       </div>
 
       <hr />
-      <video ref={refVideo} autoPlay style={{ width: '20vw', margin: 'auto' }} />
-      <p style={{ fontSize: '0.8em' }}>{videoWH}</p>
+      <div style={{ float: 'left' }}>
+        <video ref={refVideo} autoPlay style={{ width: '20vw', margin: 'auto' }} />
+        <canvas ref={refCanvas} style={{ display: 'none' }} />
+      </div>
+      <div style={{ float: 'left', padding: '2em' }}>
+        <p style={{ fontSize: '0.8em' }}>{videoWH}</p>
+        <select defaultValue='640x480' ref={refVideoSize} onChange={(e) => changeSize(e)}>
+          <option value='3840:2160'>UHD 4K 3840x2160</option>
+          <option value='1920:1080'>FHD 1080p 1920x1080</option>
+          <option value='1280:720'>HD 720p 1280x720</option>
+          <option value='800:600'>SVGA 800x600</option>
+          <option value='640:480'>VGA 640x480</option>
+        </select>
+        <br /><button onClick={download} style={{ marginTop: '1em' }}>Download</button>
+      </div>
 
       {props.audioTest &&
-        <>
+        <div style={{ clear: 'both' }}>
           <hr />
           <p>Audio Test:</p>
           <iframe
@@ -160,7 +208,7 @@ export const WebcamComponent = (props) => {
             title="Audio Test"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" />
-        </>
+        </div>
       }
     </div>
   );
