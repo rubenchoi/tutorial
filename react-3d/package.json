@@ -1,10 +1,10 @@
 {
   "name": "@rubenchoi/react3d",
-  "version": "0.8.2",
+  "version": "0.8.5",
   "description": "React 3D library using three.js",
   "author": "rubenchoi",
   "license": "MIT",
-  "repository": "https://github.com/rubenchoi/tutorial/tree/main/react-3d",
+  "repository": "https://github.com/rubenchoi/react-metaverse",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",

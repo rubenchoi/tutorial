@@ -1,3 +1,10 @@
+# Notice
+
+This project has been deprecated.
+
+Please see [React Metaverse Library](https://www.npmjs.com/package/react-metaverse) instead. 
+
+
 # React 3D
 
 [![NPM](https://img.shields.io/npm/v/react3d.svg)](https://www.npmjs.com/package/@rubenchoi/react3d) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
@@ -77,8 +84,4 @@ Sample app and 3D assets are located in [example](/example) folder.
 
 - [example/public/character/](/3d) : self-created 3D models under CC0 public domain license
 - [example/public/hdri](/example/public/hdri) : CC0 HDRI images from [HDRIHaven](https://hdrihaven.com/)
-
-## Tutorial
-
-🎸[Ruben Choi's Tutorial](https://rubenchoi.tistory.com/category/IT/React%203D%20%EC%9B%B9%EC%95%B1)
 
