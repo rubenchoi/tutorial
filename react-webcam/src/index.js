@@ -5,18 +5,20 @@ const PAN = 'pan';
 const TILT = 'tilt';
 const ZOOM = 'zoom';
 const FEATURES = [PAN, TILT, ZOOM];
+let counter = 0;
 
 export const WebcamComponent = (props) => {
   const [camFeatures, setCamFeatures] = useState({ pan: false, tilt: false, zoom: false });
   const [stream, setStream] = useState(undefined);
   const [videoWH, setVideoWH] = useState(undefined);
   const [enableAudio, setEnableAudio] = useState(true);
+  const [filename, setFilename] = useState('download');
 
   const refVideo = useRef(null);
   const refSelectMic = useRef(null);
   const refSelectVideo = useRef(null);
   const refCanvas = useRef(null);
-  const refVideoSize = useRef(null);
+  const refCounter = useRef(null);
 
   const listDevices = async () => {
     const devices = await navigator.mediaDevices.enumerateDevices();
@@ -128,15 +130,15 @@ export const WebcamComponent = (props) => {
   }
 
   const changeSize = (e) => {
-    const wh = e.target.value.split(':')
-    console.log(wh);
+    const request = e.target.value.split(':')
     const track = stream.getVideoTracks()[0];
     track.applyConstraints({
-      width: wh[0],
-      height: wh[1]
+      width: request[0],
+      height: request[1]
     }).then(() => {
       const settings = track.getSettings();
-      setVideoWH('w: ' + settings.width + ' h: ' + settings.height);
+      let msg = (Number(request[0]) === settings.width && Number(request[1]) === settings.height) ? 'changed' : 'not supported - best mached';
+      setVideoWH('w: ' + settings.width + ' h: ' + settings.height + '    ' + msg);
     })
       .catch(err => console.log(err))
   }
@@ -150,18 +152,18 @@ export const WebcamComponent = (props) => {
     canvas.toBlob(blob => {
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      // a.href.onload = () => {
-      //   URL.revokeObjectURL(url);
-      // }
-      a.download = 'testfile.png';
+      a.download = filename + (refCounter.current.checked ? '_' + (counter++) : '') + '.png';;
       document.body.appendChild(a);
       a.click();
     }, 'image/png');
+    ctx.font = "40px Arial";
+    ctx.fillStyle = "red";
+    ctx.fillText("Downloaded", 0, 40);
   }
 
   return (
     <div style={{ display: props.showDetail ? 'block' : 'none' }}>
-      <div style={{ fontSize: '1em', width: 'fit-content', border: '1px solid gray' }}>
+      <div style={{ fontSize: '1em', width: '100%', border: '1px solid gray' }}>
         <h3>Settings</h3>
         <div className={style.gridContainer}>
           <div className={style.gridItem}>Mic: </div>
@@ -181,20 +183,23 @@ export const WebcamComponent = (props) => {
       </div>
 
       <hr />
-      <div style={{ float: 'left' }}>
-        <video ref={refVideo} autoPlay style={{ width: '20vw', margin: 'auto' }} />
-        <canvas ref={refCanvas} style={{ display: 'none' }} />
+      <div style={{ float: 'left', width: '50vw' }}>
+        <video ref={refVideo} autoPlay style={{ width: '40%' }} />
+        <canvas ref={refCanvas} style={{ width: '40%', marginLeft: '5%' }} />
       </div>
       <div style={{ float: 'left', padding: '2em' }}>
         <p style={{ fontSize: '0.8em' }}>{videoWH}</p>
-        <select defaultValue='640x480' ref={refVideoSize} onChange={(e) => changeSize(e)}>
+        <select defaultValue='640:480' onChange={(e) => changeSize(e)}>
           <option value='3840:2160'>UHD 4K 3840x2160</option>
           <option value='1920:1080'>FHD 1080p 1920x1080</option>
           <option value='1280:720'>HD 720p 1280x720</option>
           <option value='800:600'>SVGA 800x600</option>
           <option value='640:480'>VGA 640x480</option>
         </select>
-        <br /><button onClick={download} style={{ marginTop: '1em' }}>Download</button>
+        <br />
+        <input type="text" onChange={e => setFilename(e.target.value)} value={filename} />
+        <button onClick={download} style={{ marginTop: '1em' }}>Download</button>
+        <label style={{ fontSize: '0.8em' }}><input type="checkbox" ref={refCounter} defaultChecked />Auto-Increase</label>
       </div>
 
       {props.audioTest &&
@@ -204,7 +209,7 @@ export const WebcamComponent = (props) => {
           <iframe
             width="100"
             height="100"
-            src="https://www.youtube.com/embed/1Hkc_2b03jw"
+            src="https://www.youtube.com/embed/I6P24OTIeZI"
             title="Audio Test"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" />

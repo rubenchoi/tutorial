@@ -15,13 +15,11 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div style={{ width: '90%', margin: 'auto' }}>
       <h2>React App Webcam Control</h2>
       <hr />
       <button onClick={() => setShowDetail(!showDetail)}>{showDetail ? 'Hide' : 'Show'}</button>
-      <div style={{ width: '40vw', margin: '1em' }}>
-        <WebcamComponent onStream={onStream} onMute={onMute} audioTest showDetail={showDetail} />
-      </div>
+      <WebcamComponent onStream={onStream} onMute={onMute} audioTest showDetail={showDetail} />
     </div >
   )
 }
