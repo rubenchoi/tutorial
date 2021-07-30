@@ -5,6 +5,7 @@ import '@rubenchoi/webcam/dist/index.css'
 
 const App = () => {
   const [showDetail, setShowDetail] = React.useState(true);
+  const [hideVideo,] = React.useState(false);
 
   const onStream = (stream, mediaParams) => {
     console.log(stream, mediaParams);
@@ -17,10 +18,17 @@ const App = () => {
   return (
     <div style={{ width: '90%', margin: 'auto' }}>
       <h2>React App Webcam Control</h2>
-      <hr />
       <button onClick={() => setShowDetail(!showDetail)}>{showDetail ? 'Hide' : 'Show'}</button>
-      <WebcamComponent onStream={onStream} onMute={onMute} audioTest showDetail={showDetail} />
-    </div >
+      <hr />
+
+      <WebcamComponent
+        onStream={onStream}
+        onMute={onMute}
+        audioTest
+        showDetail={showDetail}
+        hideVideo={hideVideo}
+      />
+    </div>
   )
 }
 

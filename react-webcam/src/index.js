@@ -156,15 +156,39 @@ export const WebcamComponent = (props) => {
       document.body.appendChild(a);
       a.click();
     }, 'image/png');
-    ctx.font = "40px Arial";
+    ctx.font = "80px Arial";
     ctx.fillStyle = "red";
-    ctx.fillText("Downloaded", 0, 40);
+    ctx.fillText("Downloaded", 0, 70);
   }
 
-  return (
+  return (<>
+    <video ref={refVideo} autoPlay
+      style={props.showDetail ?
+        { float: 'left', width: '20vw' }
+        :
+        {}
+      }
+    />
+
     <div style={{ display: props.showDetail ? 'block' : 'none' }}>
-      <div style={{ fontSize: '1em', width: '100%', border: '1px solid gray' }}>
-        <h3>Settings</h3>
+
+      <div style={{ float: 'left', width: '20vw', height: '200px', padding: '2em' }}>
+        <p style={{ fontSize: '0.8em' }}>{videoWH}</p>
+        <select defaultValue='640:480' onChange={(e) => changeSize(e)}>
+          <option value='3840:2160'>UHD 4K 3840x2160</option>
+          <option value='1920:1080'>FHD 1080p 1920x1080</option>
+          <option value='1280:720'>HD 720p 1280x720</option>
+          <option value='800:600'>SVGA 800x600</option>
+          <option value='640:480'>VGA 640x480</option>
+        </select>
+        <br />
+        <input type="text" onChange={e => setFilename(e.target.value)} value={filename} />
+        <button onClick={download} style={{ marginTop: '1em' }}>Download</button>
+        <label style={{ fontSize: '0.8em' }}><input type="checkbox" ref={refCounter} defaultChecked />Auto-Increase</label>
+      </div>
+
+      <div style={{ float: 'left', fontSize: '1em', width: 'fit-content', border: '1px solid gray', padding: '1em' }}>
+        <h4>Settings</h4>
         <div className={style.gridContainer}>
           <div className={style.gridItem}>Mic: </div>
           <div className={style.gridItem}>
@@ -182,25 +206,7 @@ export const WebcamComponent = (props) => {
         </div>
       </div>
 
-      <hr />
-      <div style={{ float: 'left', width: '50vw' }}>
-        <video ref={refVideo} autoPlay style={{ width: '40%' }} />
-        <canvas ref={refCanvas} style={{ width: '40%', marginLeft: '5%' }} />
-      </div>
-      <div style={{ float: 'left', padding: '2em' }}>
-        <p style={{ fontSize: '0.8em' }}>{videoWH}</p>
-        <select defaultValue='640:480' onChange={(e) => changeSize(e)}>
-          <option value='3840:2160'>UHD 4K 3840x2160</option>
-          <option value='1920:1080'>FHD 1080p 1920x1080</option>
-          <option value='1280:720'>HD 720p 1280x720</option>
-          <option value='800:600'>SVGA 800x600</option>
-          <option value='640:480'>VGA 640x480</option>
-        </select>
-        <br />
-        <input type="text" onChange={e => setFilename(e.target.value)} value={filename} />
-        <button onClick={download} style={{ marginTop: '1em' }}>Download</button>
-        <label style={{ fontSize: '0.8em' }}><input type="checkbox" ref={refCounter} defaultChecked />Auto-Increase</label>
-      </div>
+      <canvas ref={refCanvas} style={{ position: 'fixed', width: '20vw', bottom: 0, right: 0 }} />
 
       {props.audioTest &&
         <div style={{ clear: 'both' }}>
@@ -216,5 +222,5 @@ export const WebcamComponent = (props) => {
         </div>
       }
     </div>
-  );
+  </>);
 }
