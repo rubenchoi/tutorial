@@ -6,6 +6,7 @@ const TILT = 'tilt';
 const ZOOM = 'zoom';
 const FEATURES = [PAN, TILT, ZOOM];
 let counter = 0;
+let g_stream; //stream state undefined when stopWebcam is invoked during unmount(React hook return)
 
 export const WebcamComponent = (props) => {
   const [camFeatures, setCamFeatures] = useState({ pan: false, tilt: false, zoom: false });
@@ -94,6 +95,7 @@ export const WebcamComponent = (props) => {
     setCamFeatures(r);
 
     setStream(stream);
+    g_stream = stream;
     setVideoWH('w: ' + settings.width + ' h: ' + settings.height);
 
     const extraInfo = {
@@ -106,16 +108,26 @@ export const WebcamComponent = (props) => {
     props.onStream && props.onStream(stream, extraInfo);
   }
 
-  const stopWebcam = () => {
-    stream.getTracks().forEach(m => {
-      m.stop();
-    })
+  const stopWebcam = (s) => {
+    try {
+      s.getTracks().forEach(m => {
+        try {
+          m.stop();
+        } catch (err) {
+          console.log("stopWebcam() error track:", m);
+        }
+      })
+    } catch (err) {
+      console.log("stopWebcam() error stream:", s);
+    }
   }
 
   useEffect(() => {
     listDevices();
     startWebcam();
-    return () => { stopWebcam(); }
+    return () => {
+      stopWebcam(g_stream);
+    }
   }, []);
 
   useEffect(() => {
