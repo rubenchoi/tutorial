@@ -7,6 +7,10 @@ const App = () => {
   const [showDetail, setShowDetail] = React.useState(true);
   const [hideVideo,] = React.useState(false);
 
+  React.useEffect(() => {
+    return () => { console.log("unmounted"); }
+  }, []);
+
   const onStream = (stream, mediaParams) => {
     console.log(stream, mediaParams);
   }

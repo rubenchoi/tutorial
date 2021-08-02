@@ -36,7 +36,7 @@ export const WebcamComponent = (props) => {
           refSelectVideo.current.appendChild(option);
           break;
         default:
-          console.log('Skipped Device: ' + device.kind, device && device.label);
+          // console.log('Skipped Device: ' + device.kind, device && device.label);
           break;
       }
     });
@@ -106,9 +106,16 @@ export const WebcamComponent = (props) => {
     props.onStream && props.onStream(stream, extraInfo);
   }
 
+  const stopWebcam = () => {
+    stream.getTracks().forEach(m => {
+      m.stop();
+    })
+  }
+
   useEffect(() => {
     listDevices();
     startWebcam();
+    return () => { stopWebcam(); }
   }, []);
 
   useEffect(() => {
@@ -185,6 +192,11 @@ export const WebcamComponent = (props) => {
         <input type="text" onChange={e => setFilename(e.target.value)} value={filename} />
         <button onClick={download} style={{ marginTop: '1em' }}>Download</button>
         <label style={{ fontSize: '0.8em' }}><input type="checkbox" ref={refCounter} defaultChecked />Auto-Increase</label>
+        <hr />
+        <div className={style.gridItem}>
+          <button onClick={() => startWebcam()}>Start</button>
+          <button onClick={() => stopWebcam()} style={{ marginLeft: '1em' }}>Stop</button>
+        </div>
       </div>
 
       <div style={{ float: 'left', fontSize: '1em', width: 'fit-content', border: '1px solid gray', padding: '1em' }}>
