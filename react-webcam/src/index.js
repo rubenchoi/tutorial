@@ -175,9 +175,20 @@ export const WebcamComponent = (props) => {
       document.body.appendChild(a);
       a.click();
     }, 'image/png');
+    const image = canvas.toDataURL('image/jpeg');
     ctx.font = "80px Arial";
     ctx.fillStyle = "red";
     ctx.fillText("Downloaded", 0, 70);
+  }
+
+  const onImage = () => {
+    const canvas = refCanvas.current;
+    const ctx = canvas.getContext('2d');
+    canvas.width = refVideo.current.videoWidth;
+    canvas.height = refVideo.current.videoHeight;
+    ctx.drawImage(refVideo.current, 0, 0);
+    const image = canvas.toDataURL('image/jpeg');
+    props.onImage(image);
   }
 
   return (<>
@@ -201,13 +212,18 @@ export const WebcamComponent = (props) => {
           <option value='640:480'>VGA 640x480</option>
         </select>
         <br />
-        <input type="text" onChange={e => setFilename(e.target.value)} value={filename} />
-        <button onClick={download} style={{ marginTop: '1em' }}>Download</button>
-        <label style={{ fontSize: '0.8em' }}><input type="checkbox" ref={refCounter} defaultChecked />Auto-Increase</label>
+        {props.onImage ?
+          <button onClick={onImage} style={{ marginTop: '1em' }}>Callback</button>
+          : <>
+            <input type="text" onChange={e => setFilename(e.target.value)} value={filename} />
+            <button onClick={download} style={{ marginTop: '1em' }}>Download</button>
+            <label style={{ fontSize: '0.8em' }}><input type="checkbox" ref={refCounter} defaultChecked />Auto-Increase</label>
+          </>
+        }
         <hr />
         <div className={style.gridItem}>
           <button onClick={() => startWebcam()}>Start</button>
-          <button onClick={() => stopWebcam()} style={{ marginLeft: '1em' }}>Stop</button>
+          <button onClick={() => stopWebcam(g_stream)} style={{ marginLeft: '1em' }}>Stop</button>
         </div>
       </div>
 

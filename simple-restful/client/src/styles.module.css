@@ -1,0 +1,12 @@
+.gridContainer{
+  display: grid;
+  grid-template-columns: auto auto ;
+  padding: 1em;
+}
+
+.gridItem{
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 0.3em;
+  font-size: 1em;
+  text-align: left;
+}
