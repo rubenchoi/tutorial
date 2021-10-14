@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import React, { Fragment } from 'react';
 import { Button } from 'reactstrap';
 import DialogflowHandler from './core/DialogflowHandler.js';
+import TTSHandler from './core/TTSHandler.js';
 
 const DialogComponent = (props) => {
   const [stream, setStream] = React.useState(undefined);
@@ -30,6 +31,10 @@ const DialogComponent = (props) => {
         :
         <p>waiting for microphone...</p>
       }
+
+      <TTSHandler
+        showDetail={true}
+      />
 
       {props.showDetail &&
         <div style={{ margin: '1em' }}>

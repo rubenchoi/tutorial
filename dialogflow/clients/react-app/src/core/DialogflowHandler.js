@@ -7,7 +7,7 @@ import { Button } from 'reactstrap';
 import Status from './Status.js';
 
 
-const DEFAULT_PORT = 8001;
+const DEFAULT_PORT = 8000;
 const DEFAULT_HOSTNAME = '127.0.0.1';
 
 export default class DialogflowHandler extends React.Component {

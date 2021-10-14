@@ -27,7 +27,7 @@ const App = (props) => {
   }
 
   return (<>
-    <React3D />
+    {/* <React3D /> */}
     <Draggable>
       <div style={{ width: 'fit-content', transform: 'scale(0.7, 0.7)', background: 'rgba(255,255,255,0.3)', margin: '0.5em' }}>
         {status !== Status.LISTENING ?
