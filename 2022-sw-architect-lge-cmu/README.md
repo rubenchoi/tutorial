@@ -1,20 +1,23 @@
-This project includes:
+# LG Software Architect 2022 Team 4 Studio Project
 
-1. alpr-exeutables 
-  :an executable file (lgdemo.exe) built from alpr-OpenAPLR-3.1.1_Vs2022 which reads the video file and detect the license plate numbers.
+This is the studio project of LG Electronics Software Architect 2002 program in CMU.
 
-2. alpr-OpenAPLR-3.1.1_Vs2022 
-  :the modified source codes (from originally given project)
-  :based on Visual C++
+## includes
 
-3. back-end
-  :back-end server which connects database and provides REST API. 
-  :based on node.js express 
-  :Please see Readme.md for installation & run
+### alpr-exeutables 
+  * an executable file (lgdemo.exe) built from alpr-OpenAPLR-3.1.1_Vs2022 which reads the video file and detect the license plate numbers
 
-4. front-end
-  :React UI app
-  :Please see Readme.md for installation & run
+### alpr-OpenAPLR-3.1.1_Vs2022
+  * the modified source codes (from originally given project) based on Visual C++. (not included in git)
 
+### [back-end](https://github.com/rubenchoi/tutorial/tree/main/2022-sw-architect-lge-cmu/back-end)
+  * back-end server which connects database and provides REST API, based on node.js express
 
-Also includes the documentations (.pdf)
+### [front-end](https://github.com/rubenchoi/tutorial/tree/main/2022-sw-architect-lge-cmu/front-end)
+  * React UI app
+
+## Documents
+  
+  * [Software Architecture Document](https://github.com/rubenchoi/tutorial/blob/main/2022-sw-architect-lge-cmu/Team4-M3-final-document.pdf)
+  * [Final Presentation](https://github.com/rubenchoi/tutorial/blob/main/2022-sw-architect-lge-cmu/Team4-M3-presentation.zip) - encrypted due to copyright issue.
+
