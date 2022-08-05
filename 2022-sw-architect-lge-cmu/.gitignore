@@ -1,0 +1,11 @@
+/certs
+/doxygen
+**/.idea/
+**/package-lock.json
+*.obj
+**/faker/datafile.json
+**/faker/datafile.txt
+solr-9.0.0/example/cloud/
+server/prisma/migrations/
+alpr-OpenAPLR-3.1.1_Vs2022/
+Team4-M3-presentation.pdf

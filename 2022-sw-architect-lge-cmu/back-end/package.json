@@ -1,0 +1,39 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "2022 LGE S/W Archiect ★ Team 4 ★ Server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^3.15.2",
+    "aedes": "^0.47.0",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.3",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "fast-levenshtein": "^3.0.0",
+    "http": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.7.0",
+    "mongoose": "^6.4.2",
+    "morgan": "^1.10.0",
+    "mqtt": "^4.3.7",
+    "path": "^0.12.7",
+    "websocket-stream": "^5.5.2",
+    "ws": "^8.8.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1",
+    "prisma": "^3.15.2"
+  },
+  "prisma": {
+    "seed": "node prisma/license_plate.js"
+  }
+}
