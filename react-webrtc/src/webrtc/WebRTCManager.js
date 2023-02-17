@@ -60,7 +60,7 @@ const WebRTCManager = () => {
     }
 
     const setRemoteMedia = e => {
-        console.log("setRemoteMedia", e.streams[0], myVideoRef.current.srcObject);
+        console.log("setRemoteMedia", e.streams[0], e);
         remoteVideoRef.current.srcObject = e.streams[0];
     }
 
@@ -227,32 +227,45 @@ const WebRTCManager = () => {
     //----------------------------- WebRTC -----------------------------//
     //------------------------------------------------------------------//
     const createOffer = async () => {
-        // peerRef.current = await createPeer();
+        peerRef.current = await createPeer();
         const offer = await peerRef.current.createOffer();
         await peerRef.current.setLocalDescription(offer);
         console.log(`[createOffer]`, offer);
         return offer;
     }
 
-    const handleAnswer = async (answer) => {
-        await peerRef.current.setRemoteDescription(answer);
+    const handleAnswer = async (sessionDescription) => {
+        let sdp = sessionDescription;
+        try {
+            await peerRef.current.setRemoteDescription(sdp);
+        } catch (e) {
+            console.error("handleAnswer: 1st error. Wrapping and try again...", e);
+            sdp = new RTCSessionDescription({ sdp: sdp, type: "answer" });
+            try {
+                await peerRef.current.setRemoteDescription(sdp);
+                console.error("handleAnswer: now is ok");
+            } catch (e) {
+                console.error("handleAnswer: finally failed!", e);
+            }
+        }
     }
 
     // [troubleshoot] do not use new RTCSessionDescription({ sdp: sdp, type: "offer" })
     // [troubleshoot] do not forget await! - cause state error
     const createAnswer = async (sessionDescription) => {
         try {
-            // peerRef.current = await createPeer(false);
+            peerRef.current = await createPeer(false);
             let sdp = sessionDescription;
             try {
                 await peerRef.current.setRemoteDescription(sdp);
             } catch (e) {
-                console.log("setRemoteDesciption error. wrapping...");
+                console.error("setRemoteDesciption error. Wrapping and try again...", e);
                 sdp = new RTCSessionDescription({ sdp: sessionDescription, type: "offer" });
                 try {
                     await peerRef.current.setRemoteDescription(sdp);
+                    console.error("now is ok");
                 } catch (e) {
-                    console.error("something's wrong here!");
+                    console.error("something's wrong here!", e);
                 }
             }
             const answer = await peerRef.current.createAnswer();
@@ -271,9 +284,9 @@ const WebRTCManager = () => {
                 sdpMid: sdpMid,
                 sdpMLineIndex: sdpMLineIndex
             };
-            // const r = new RTCIceCandidate(option);
-            // console.log(r);
-            await peerRef.current.addIceCandidate(option);
+            const r = new RTCIceCandidate(option);
+            console.log(r);
+            peerRef.current && await peerRef.current.addIceCandidate(r);
         } catch (e) {
             console.error("error adding received ice candidate", { candidate, sdpMid, sdpMLineIndex });
             console.error(e);
@@ -287,8 +300,9 @@ const WebRTCManager = () => {
         }
     }
 
-    useEffect(async() => {
-        peerRef.current = await createPeer();
+    useEffect(() => {
+        // useEffect(async() => {
+        // peerRef.current = await createPeer();
         return () => {
             if (socketRef.current) {
                 socketRef.current.close();
