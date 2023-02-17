@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react"
 
 const SIGNALING_SERVER_URL = `ws://${window.location.hostname}:8080`;
 
+
 console.log(SIGNALING_SERVER_URL);
 
 const RTC_CONFIG = {
@@ -227,7 +228,7 @@ const WebRTCManager = () => {
     //----------------------------- WebRTC -----------------------------//
     //------------------------------------------------------------------//
     const createOffer = async () => {
-        peerRef.current = await createPeer();
+        if (!peerRef.current) peerRef.current = await createPeer();
         const offer = await peerRef.current.createOffer();
         await peerRef.current.setLocalDescription(offer);
         console.log(`[createOffer]`, offer);
@@ -254,7 +255,7 @@ const WebRTCManager = () => {
     // [troubleshoot] do not forget await! - cause state error
     const createAnswer = async (sessionDescription) => {
         try {
-            peerRef.current = await createPeer(false);
+            if (!peerRef.current) peerRef.current = await createPeer(false);
             let sdp = sessionDescription;
             try {
                 await peerRef.current.setRemoteDescription(sdp);
@@ -301,8 +302,10 @@ const WebRTCManager = () => {
     }
 
     useEffect(() => {
-        // useEffect(async() => {
-        // peerRef.current = await createPeer();
+        const init = async () => {
+            peerRef.current = await createPeer();
+        }
+        init();
         return () => {
             if (socketRef.current) {
                 socketRef.current.close();
