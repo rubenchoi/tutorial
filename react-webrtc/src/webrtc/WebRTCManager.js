@@ -1,10 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect } from "react"
 
-const SIGNALING_SERVER_URL = `ws://${window.location.hostname}:8080`;
-
-
-console.log(SIGNALING_SERVER_URL);
+// localStorage.setItem('signaling', `ws://${window.location.hostname}:8080`);
+const SIGNALING_SERVER_URL = localStorage.getItem('signaling') === null ? `ws://${window.location.hostname}:8080` : localStorage.getItem('signaling');
 
 const RTC_CONFIG = {
     sdpSemantics: 'unified-plan',
